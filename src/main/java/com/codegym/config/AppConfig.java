@@ -1,5 +1,7 @@
 package com.codegym.config;
 
+import com.codegym.service.order.IOrderService;
+import com.codegym.service.order.OrderServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -48,7 +50,7 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/views/");
+        templateResolver.setPrefix("/WEB-INF/");
         templateResolver.setSuffix(".html");
         templateResolver.setTemplateMode(TemplateMode.HTML); // views type
         templateResolver.setCharacterEncoding("UTF-8"); // text-format on views
@@ -79,7 +81,7 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("model"); // targeting Entity for EntityManager
+        em.setPackagesToScan("com.codegym.model"); // targeting Entity for EntityManager
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
@@ -91,7 +93,7 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/blogdb");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/hotelmanagement");
         dataSource.setUsername("root");
         dataSource.setPassword("12345a@A");
         return dataSource;
@@ -109,6 +111,10 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
         properties.setProperty("hibernate.hbm2ddl.auto", "update"); // hỗ trợ upload cấu trúc bảng
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect"); // loại csdl là MySQL5
         return properties;
+    }
+    @Bean
+    public IOrderService iOrderService() {
+        return new OrderServiceImpl();
     }
 
     // formatter config
