@@ -1,6 +1,6 @@
 .gradle
 .idea
 build
-src/main/java/com/codegym/configuration/AppInit.java
-src/main/java/com/codegym/configuration/WebConfig.java
+src/main/java/com/codegym/config/AppInit.java
+src/main/java/com/codegym/config/WebConfig.java
 src/test
