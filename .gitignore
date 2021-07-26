@@ -2,5 +2,6 @@
 .idea
 build
 src/main/java/config/AppInit.java
-src/main/java/config/WebConfig.java
+src/main/java/config/AppConfig.java
+src/main/java/config
 src/test

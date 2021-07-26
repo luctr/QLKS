@@ -1,4 +1,4 @@
-package com.codegym.configuration;
+package com.codegym.config;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
+import org.springframework.format.FormatterRegistry;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -35,32 +36,30 @@ import java.util.Properties;
 @EnableJpaRepositories("com.codegym.repository")
 @EnableSpringDataWebSupport
 public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
-
-    private ApplicationContext applicationContext;
+    private ApplicationContext applicationContext; // Initialize Spring Container
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         this.applicationContext = applicationContext;
     }
 
+    //3 function of Thymeleaf Configuration :
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
-        templateResolver.setPrefix("/WEB-INF/views");
+        templateResolver.setPrefix("/views/");
         templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode(TemplateMode.HTML);
-        templateResolver.setCharacterEncoding("UTF-8");
+        templateResolver.setTemplateMode(TemplateMode.HTML); // views type
+        templateResolver.setCharacterEncoding("UTF-8"); // text-format on views
         return templateResolver;
     }
-
     @Bean
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
         templateEngine.setTemplateResolver(templateResolver());
         return templateEngine;
     }
-
     @Bean
     public ThymeleafViewResolver viewResolver() {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
@@ -69,6 +68,7 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
         return viewResolver;
     }
 
+    //5 function if JPA configuration
     @Bean
     @Qualifier(value = "entityManager")
     public EntityManager entityManager(EntityManagerFactory entityManagerFactory) {
@@ -79,7 +79,7 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(dataSource());
-        em.setPackagesToScan("com.codegym.model");
+        em.setPackagesToScan("model"); // targeting Entity for EntityManager
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
@@ -91,9 +91,9 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/hotel_management");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/blogdb");
         dataSource.setUsername("root");
-        dataSource.setPassword("Tien0608");
+        dataSource.setPassword("12345a@A");
         return dataSource;
     }
 
@@ -106,10 +106,14 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
 
     public Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.setProperty("hibernate.hbm2ddl.auto", "update"); // hỗ trợ upload cấu trúc bảng
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect"); // loại csdl là MySQL5
         return properties;
     }
 
-
+    // formatter config
+    @Override
+    public void addFormatters(FormatterRegistry registry) {
+//        registry.addFormatter(new ProvinceFormatter(applicationContext.getBean(ProvinceService.class)));
+    }
 }
