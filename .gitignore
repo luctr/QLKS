@@ -3,5 +3,5 @@
 build
 src/main/java/config/AppInit.java
 src/main/java/config/AppConfig.java
-src/main/java/config
+src/main/java/config/
 src/test
