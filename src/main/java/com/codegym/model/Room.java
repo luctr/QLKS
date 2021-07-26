@@ -3,6 +3,7 @@ package com.codegym.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "room")
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

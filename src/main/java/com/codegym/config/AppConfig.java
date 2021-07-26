@@ -1,5 +1,6 @@
 package com.codegym.config;
 
+import com.codegym.formater.UserFormatter;
 import com.codegym.service.order.IOrderService;
 import com.codegym.service.order.OrderServiceImpl;
 import org.springframework.beans.BeansException;
@@ -19,7 +20,9 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
@@ -29,6 +32,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.util.Properties;
 
 @Configuration
@@ -37,6 +41,7 @@ import java.util.Properties;
 @ComponentScan("com.codegym.controller")
 @EnableJpaRepositories("com.codegym.repository")
 @EnableSpringDataWebSupport
+
 public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     private ApplicationContext applicationContext; // Initialize Spring Container
 
@@ -120,6 +125,19 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     // formatter config
     @Override
     public void addFormatters(FormatterRegistry registry) {
-//        registry.addFormatter(new ProvinceFormatter(applicationContext.getBean(ProvinceService.class)));
+//        registry.addFormatter(new UserFormatter(applicationContext.getBean(UserService.class)));
+//        registry.addFormatter(new UserFormatter(applicationContext.getBean(UserService.class)));
+    }
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry .addResourceHandler("/**") .addResourceLocations("/assets/");
+//        registry.addResourceHandler("/nhuanh/**") //đường dẫn ảo thay thế cho đường dẫn thật bên dưới (ngắn hơn)
+//                .addResourceLocations("file:" + "/Users/daonhuanh/Downloads/Codegym/nal/");
+    }
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver getResolver() throws IOException {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setMaxUploadSizePerFile(52428800); //kích thước tối đa
+        return resolver;
     }
 }

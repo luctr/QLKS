@@ -4,11 +4,13 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "orders")
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime timeIn;
+
     private LocalDateTime timeOut;
 
     @ManyToOne(targetEntity = User.class)
