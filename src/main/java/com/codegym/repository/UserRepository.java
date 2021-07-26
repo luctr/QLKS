@@ -1,4 +1,4 @@
-package repository;
+package com.codegym.repository;
 
 
 import java.util.Optional;
