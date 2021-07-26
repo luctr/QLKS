@@ -1,4 +1,4 @@
-package com.codegym.configuration;
+package com.codegym.config;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
