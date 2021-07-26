@@ -1,6 +1,9 @@
 package com.codegym.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -11,12 +14,34 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty
+    @Pattern(regexp = "^[a-zA-Z]*",message = "The name is a letter consisting of the letters a-z A-Z and has a length of 2 to 30 characters")
+    @Size(min = 2,max = 30)
     private String username;
+
+    @NotEmpty
+    @Size(min = 10,max = 20)
+    @Pattern(regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*?[0-9]).{10,20}$ ",message =
+            "At least one lowercase letter, one uppercase letter, number and password between 10 and 20 characters in length")
     private String password;
+
+    @NotEmpty
+    @Size(min = 2,max = 30)
     private String fullName;
+
+    @NotEmpty
+    @Past
+    @DateTimeFormat(pattern = "MM /dd/yyyy")
     private LocalDate dob;
+
+    @NotEmpty
+    @Pattern(regexp = "((09|03|07|08|05)+([0-9]{8})\\b)" ,message = "Error")
     private String phone;
+
+    @NotEmpty
+    @Email
     private String email;
+
     private String image;
 
     @ManyToMany(targetEntity = Role.class)
