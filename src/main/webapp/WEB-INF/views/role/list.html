@@ -7,13 +7,16 @@
 <body>
 <a href="/roles/create">Create new role</a>
 <h1>Role list</h1>
+<th:block>
+    <span th:if="${message}" th:text="${message}"></span>
+</th:block>
 <table border="1px solid black">
-  <tr>
-    <th>Name</th>
-  </tr>
-  <tr th:each="role: ${roles}">
-    <td th:text="${role.name}"></td>
-  </tr>
+    <tr>
+        <th>Name</th>
+    </tr>
+    <tr th:each="role: ${roles}">
+        <td><a th:href="@{/roles/__${role.id}__/view}" th:text="${role.name}"></a></td>
+    </tr>
 </table>
 </body>
 </html>
