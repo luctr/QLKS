@@ -26,6 +26,11 @@ public class Orders {
         this.user = user;
         this.room = room;
     }
+    public Orders(User user, Room room) {
+        this.timeIn = LocalDateTime.now();
+        this.user = user;
+        this.room = room;
+    }
 
     public Long getId() {
         return id;
