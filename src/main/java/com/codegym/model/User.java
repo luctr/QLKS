@@ -18,7 +18,8 @@ public class User {
     private String email;
     private String image;
 
-    @ManyToMany(targetEntity = Role.class)
+    @ManyToMany(targetEntity = Role.class, fetch = FetchType.EAGER
+    )
     private List<Role> roles;
 
     public User() {
