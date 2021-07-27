@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<a href="/create-room">Create new room</a>
+
+<table border="1">
+    <tr>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Province</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </tr>
+    <th:block th:each="room : ${rooms}">
+        <tr>
+            <td th:text="${room.id}"></td>
+            <td th:text="${room.name}"></td>
+            <td th:text="${room.description}"></td>
+            <td >
+                <img th:src ="${room.image}">
+            </td>
+            <td th:text="${room.status}"></td>
+            <td th:text="${room.type}"></td>
+            <td><a th:href="@{/edit-room/__${room.id}__ }">Edit</a></td>
+            <td><a th:href="@{/delete-room/__${room.id}__ }">Delete</a></td>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>
