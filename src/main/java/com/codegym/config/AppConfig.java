@@ -2,8 +2,6 @@ package com.codegym.config;
 
 import com.codegym.service.role.IRoleService;
 import com.codegym.service.role.RoleServiceImpl;
-import com.codegym.service.type.ITypeService;
-import com.codegym.service.type.TypeServiceImpl;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -118,10 +116,5 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     @Bean
     public IRoleService roleService(){
         return new RoleServiceImpl();
-    }
-
-    @Bean
-    public ITypeService typeService(){
-        return new TypeServiceImpl();
     }
 }
