@@ -1,5 +1,6 @@
 package com.codegym.configuration;
 
+import com.codegym.service.user.IUserService;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
@@ -111,5 +112,9 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
         return properties;
     }
 
+    @Bean
+    public IUserService userService() {
+        return userService();
+    }
 
 }

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Delete</h1>
+<a href="/user/list">User list</a>
+<div id="form">
+<form th:action="@{/user/delete}" method="post" th:object="${user}">
+    <table>
+        <tr>
+            <th>User Name</th>
+            <td><input type="text" disabled th:field="*{username}"></td>
+           </tr>
+        <tr>
+            <th>Password</th>
+            <td><input type="text" disabled th:field="*{password}"></td>
+            </tr>
+        <tr>
+            <th>Name</th>
+            <td><input type="text" disabled th:field="*{name}"></td>
+            </tr>
+        <tr>
+            <th>Dod</th>
+            <td><input type="text" disabled th:field="*{dod}"></td>
+           </tr>
+        <tr>
+            <th>Phone</th>
+            <td><input type="text" disabled th:field="*{phone}"></td>
+            </tr>
+        <tr>
+            <th>Email</th>
+            <td><input type="text" disabled th:field="*{email}"></td>
+           </tr>
+        <tr>
+            <th>Image</th>
+            <td><input type="text" th:field="*{image}"></td>
+            </tr>
+        <tr>
+            <th>Role</th>
+            <td><input type="text"disabled th:field="*{role}"></td>
+            </tr>
+        <tr><td><input type="submit" value="Delete"></td></tr>
+    </table>
+</form>
+</div>
+</body>
+</html>

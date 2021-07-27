@@ -28,4 +28,5 @@ dependencies {
     compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
     compile group: 'org.hibernate', name: 'hibernate-validator', version: '6.0.10.Final'
     compile group: 'org.springframework', name: 'spring-aspects', version: '5.3.2'
+    compile group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '2.5.2'
 }

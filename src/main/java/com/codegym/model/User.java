@@ -42,6 +42,7 @@ public class User {
     @Email
     private String email;
 
+    @NotEmpty
     private String image;
 
     @ManyToMany(targetEntity = Role.class)
