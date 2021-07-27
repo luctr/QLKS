@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete type</title>
+</head>
+<body>
+<h1>Delete type</h1>
+<h2>Are you sure?</h2>
+<form th:action="@{/types/__${type.id}__/delete}" method="post" th:object="${type}">
+    <input type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td th:text="${type.name}"></td>
+        </tr>
+        <tr>
+            <td>Price:</td>
+            <td th:text="${type.price}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <button>Delete</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
