@@ -30,6 +30,7 @@ public class Orders {
     }
     public Orders(User user, Room room) {
         this.timeIn = LocalDateTime.now();
+        this.timeOut = null;
         this.user = user;
         this.room = room;
     }

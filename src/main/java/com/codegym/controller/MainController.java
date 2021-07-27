@@ -11,6 +11,6 @@ public class MainController {
 
     @GetMapping("")
     public ModelAndView showMainSite() {
-        return new ModelAndView("main-site");
+        return new ModelAndView("manager-layout");
     }
 }

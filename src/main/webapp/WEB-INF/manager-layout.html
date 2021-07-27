@@ -10,35 +10,32 @@
 <body>
 <div class="container-fluid">
   <div class="row" th:fragment="navbar-fragment">
-    <nav class="navbar navbar-light" style="background-color: #7abdef;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#">
-          <img src="img/26a2877f8cfb41b4b51cf46f3a024ef8.png"  alt="" class="d-inline-block align-text-top">
+          <img src="img/26a2877f8cfb41b4b51cf46f3a024ef8.png" alt="">
+            Spring MVC Hotel
         </a>
-        <a class="navbar-brand" th:href="@{/main}">Home</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" th:href="@{/orders}">Order Management</a>
+              <a class="nav-link" href="/orders/">Orders Management</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">User Management</a>
+              <a class="nav-link" href="#">Rooms Management</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Room Management</a>
+              <a class="nav-link" href="#">Pricing</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-  </div>
-  <div class="row">
-
-  </div>
+  <div class="row"></div>
 </div>
-
+</div>
 </body>
 </html>
