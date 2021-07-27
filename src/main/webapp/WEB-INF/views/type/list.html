@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Type list</title>
+</head>
+<body>
+<a href="/types/create">Create new type</a>
+<h1>Type list</h1>
+<table border="1px solid black">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    <tr th:each="type: ${types}">
+        <td><a th:href="@{/types/__${type.id}__/view}" th:text="${type.name}"></a></td>
+        <td th:text="${type.price}"></td>
+    </tr>
+</table>
+</body>
+</html>
