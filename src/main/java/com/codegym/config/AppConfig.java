@@ -130,9 +130,9 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry .addResourceHandler("/**") .addResourceLocations("/assets/");
 //        registry.addResourceHandler("/nhuanh/**") //đường dẫn ảo thay thế cho đường dẫn thật bên dưới (ngắn hơn)
 //                .addResourceLocations("file:" + "/Users/daonhuanh/Downloads/Codegym/nal/");
+        registry.addResourceHandler("/img/**").addResourceLocations("WEB-INF/img/");
     }
     @Bean(name = "multipartResolver")
     public CommonsMultipartResolver getResolver() throws IOException {
