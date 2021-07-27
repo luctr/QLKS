@@ -5,15 +5,17 @@
     <title>Title</title>
 </head>
 <body>
-<a href="/create-room">Create new room</a>
+<a href="/room/create-room">Create new room</a>
 
 <table border="1">
     <tr>
-        <th>First name</th>
-        <th>Last name</th>
-        <th>Province</th>
-        <th>Edit</th>
-        <th>Delete</th>
+        <th>ID  </th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Status</th>
+        <th>Type</th>
+        <th colspan="2">Action</th>
     </tr>
     <th:block th:each="room : ${rooms}">
         <tr>
@@ -21,12 +23,13 @@
             <td th:text="${room.name}"></td>
             <td th:text="${room.description}"></td>
             <td >
-                <img th:src ="${room.image}">
+                <img style="height: 50px; width: 50px" th:src ="@{'/file/'+${room.image}}">
             </td>
-            <td th:text="${room.status}"></td>
-            <td th:text="${room.type}"></td>
-            <td><a th:href="@{/edit-room/__${room.id}__ }">Edit</a></td>
-            <td><a th:href="@{/delete-room/__${room.id}__ }">Delete</a></td>
+            <td th:text="${room.status == 1 } ? 'Empty Room' : 'Room With People'" >
+            </td>
+            <td th:text="${room.type.name}"></td>
+            <td><a th:href="@{/room/edit-room/{id}(id = ${room.id})}">Edit</a></td>
+            <td><a th:href="@{/room/delete-room/__${room.id}__}">Delete</a></td>
         </tr>
     </th:block>
 </table>

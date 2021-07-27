@@ -1,10 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Delete room</title>
 </head>
 <body>
-
+<h1>Delete Room</h1>
+<h2>Are you sure?</h2>
+<p>
+    <a href="/room/listRoom">Room list</a>
+</p>
+<form th:action="@{/room/delete-room}" method="post">
+    <input th:type="hidden" name="id" th:field="*{id}">
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td th:text="${room.name}"></td>
+        </tr>
+        <tr>
+            <td>Description :</td>
+            <td th:text="${room.description}"></td>
+        </tr>
+        <tr>
+            <td>Image  :</td>
+            <td>
+                <img style="height: 50px; width: 50px" th:src ="@{'/file/'+${room.image}}">
+            </td>
+        </tr>
+        <tr>
+            <td>Status :</td>
+            <td th:text="${room.status == 1 } ? 'Empty Room' : 'Room With People'" >
+        </tr>
+        <tr>
+            <td>Type :</td>
+            <td th:text="${room.type.name}"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Delete room"></td>
+        </tr>
+    </table>
+</form>
 </body>
 </html>

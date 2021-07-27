@@ -7,12 +7,10 @@
 <body>
 <h1>Create Room</h1>
 <p>
-    <a href="/room">Room list</a>
+    <a href="/room/listRoom">Room list</a>
 </p>
-<th:block th:if="${message}">
-    <p th:text="${message}"></p>
-</th:block>
-<form th:action="@{/create-room}" th:object="${room}" method="post" enctype="multipart/form-data" >
+
+<form method="post" enctype="multipart/form-data" >
     <table>
         <tr>
             <td>Name:</td>
@@ -24,7 +22,7 @@
         </tr>
         <tr>
             <td>Image:</td>
-            <td><input type="file" name="image"/></td>
+            <td><input type="file" name="file"/></td>
         </tr>
         <tr>
             <td>Status:</td>
@@ -35,17 +33,17 @@
                 </select>
             </td>
         </tr>
-<!--        <tr>-->
-<!--            <td>Type:</td>-->
-<!--            <td>-->
-<!--                <select th:field="*{province}">-->
-<!--                    <option th:each="p : ${provinces}" th:value="${p.id}" th:text="${p.name}"></option>-->
-<!--                </select>-->
-<!--            </td>-->
-<!--        </tr>-->
+        <tr>
+            <td>Type:</td>
+            <td>
+                <select name="type">
+                    <option th:each="t : ${type}" th:value="${t.id}" th:text="${t.name}"></option>
+                </select>
+            </td>
+        </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="Create customer"></td>
+            <td><input type="submit" value="Create Room"></td>
         </tr>
     </table>
 </form>

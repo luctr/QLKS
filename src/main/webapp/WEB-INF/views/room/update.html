@@ -1,10 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
+<p>
+    <a href="/room/listRoom">Room list</a>
+</p>
+<!--<th:block th:if="${message}">-->
+<!--    <p th:text="${message}"></p>-->
+<!--</th:block>-->
+<form th:action="@{/room/update-room}" th:object="${room}" method="post">
+    <table>
+        <tr hidden>
+        <td>Id :</td>
+        <td><input type="text" name="id" th:field="${room.id}" /></td>
+    </tr>
+        <tr>
+            <td>Name:</td>
+            <td><input type="text" name="name" th:field="${room.name}" /></td>
+        </tr>
+        <tr>
+            <td>Description:</td>
+            <td><input type="text" name="description" th:field="${room.description}"/></td>
+        </tr>
+        <tr>
+            <td>Image:</td>
+            <td><input type="file" name="image" th:field="${room.image}"/></td>
+        </tr>
+        <tr>
+            <td>Status:</td>
+            <td>
+                <select name="status" th:field="${room.status}">
+                    <option value="1" >Empty Room</option>
+                    <option value="2">Room With People</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Type:</td>
+            <td>
+                <select th:field="*{type}">
+                    <option th:each="t : ${type}" th:value="${t.id}" th:text="${t.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Create customer"></td>
+        </tr>
+    </table>
+</form>
 
 </body>
 </html>

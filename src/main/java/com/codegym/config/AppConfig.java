@@ -2,6 +2,8 @@ package com.codegym.config;
 
 import com.codegym.service.role.IRoleService;
 import com.codegym.service.role.RoleServiceImpl;
+import com.codegym.service.room.IRoomService;
+import com.codegym.service.room.RoomService;
 import com.codegym.service.type.ITypeService;
 import com.codegym.service.type.TypeServiceImpl;
 import org.springframework.beans.BeansException;
@@ -20,7 +22,9 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
@@ -30,6 +34,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.util.Properties;
 
 @Configuration
@@ -95,9 +100,9 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/hotel_management");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/qlks");
         dataSource.setUsername("root");
-        dataSource.setPassword("Tien0608");
+        dataSource.setPassword("Aa13071997");
         return dataSource;
     }
 
@@ -114,6 +119,18 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
         properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
         return properties;
     }
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry .addResourceHandler("/**") .addResourceLocations("/assets/");
+        registry.addResourceHandler("/file/**")
+                .addResourceLocations("file:" + "C:/Users/Huy Hoang/Downloads/");
+    }
+    @Bean(name = "multipartResolver")
+    public CommonsMultipartResolver getResolver() throws IOException {
+        CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+        resolver.setMaxUploadSizePerFile(52428800);
+        return resolver;
+    }
 
     @Bean
     public IRoleService roleService(){
@@ -123,5 +140,10 @@ public class AppConfig implements WebMvcConfigurer, ApplicationContextAware {
     @Bean
     public ITypeService typeService(){
         return new TypeServiceImpl();
+    }
+
+    @Bean
+    public IRoomService roomService(){
+        return new RoomService();
     }
 }
