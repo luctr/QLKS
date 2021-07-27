@@ -3,11 +3,10 @@ package com.codegym.controller;
 import com.codegym.model.Role;
 import com.codegym.service.role.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Optional;
@@ -58,14 +57,32 @@ public class RoleController {
             modelAndView.addObject("role", role.get());
             return modelAndView;
         } else {
-            return new ModelAndView("redirect:/roles");
+            return new ModelAndView("/error-404");
         }
     }
 
     @PostMapping("/{id}/edit")
-    public ModelAndView update(Role role) {
+    public ModelAndView update(@ModelAttribute("role") Role role) {
         roleService.save(role);
         return new ModelAndView("redirect:/roles");
+    }
+
+    @GetMapping("/{id}/delete")
+    public ModelAndView showFormDelete(@PathVariable Long id) {
+        Optional<Role> role = roleService.findById(id);
+        if (role.isPresent()) {
+            ModelAndView modelAndView = new ModelAndView("/role/delete");
+            modelAndView.addObject("role", role.get());
+            return modelAndView;
+        } else {
+            return new ModelAndView("/error-404");
+        }
+    }
+
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable Long id) {
+        roleService.delete(id);
+        return "redirect:/roles";
     }
 
 }
